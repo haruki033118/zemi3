@@ -21,10 +21,11 @@ font = '/app/services/omikuzi/玉ねぎ楷書激無料版v7改.ttf'
 async def omikuzi(omikuzi_text: OmikuziText, 
                   background_tasks:BackgroundTasks,
                   shrine_name:str=Query(default='拳母神社'), 
-                  icon_url:HttpUrl=Query(...)
+                  #icon_url:HttpUrl=Query(...)
     ):
     # おみくじ画像を生成
-    generated_image_path = generate_omikuzi(img_path=omikuzi_template, font_path=font, omikuzi_text=omikuzi_text, shrine_name=shrine_name, icon_url=icon_url)
+    generated_image_path = generate_omikuzi(img_path=omikuzi_template, font_path=font, omikuzi_text=omikuzi_text, shrine_name=shrine_name)
+    #generated_image_path = generate_omikuzi(img_path=omikuzi_template, font_path=font, omikuzi_text=omikuzi_text, shrine_name=shrine_name, icon_url=icon_url)
 
     # 送信後に一時ファイルを削除
     background_tasks.add_task(remove_file, generated_image_path)

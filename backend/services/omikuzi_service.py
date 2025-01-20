@@ -51,7 +51,7 @@ def remove_file(file_path: str):
         os.remove(file_path)
 
 #おみくじの生成
-def generate_omikuzi(img_path, font_path, omikuzi_text, shrine_name, icon_url):
+def generate_omikuzi(img_path, font_path, omikuzi_text, shrine_name):
     img = Image.open(img_path).copy()
     input_text = omikuzi_text.dict()
     img = add_text_to_image_vertical(img, shrine_name, (1830, 50), font_path, 50)
@@ -62,12 +62,12 @@ def generate_omikuzi(img_path, font_path, omikuzi_text, shrine_name, icon_url):
     img = add_text_to_image_vertical(img, input_text["学問"], (770, 50), font_path, 50, 20)
     img = add_text_to_image_vertical(img, input_text["恋愛"], (550, 50), font_path, 50, 20)
     img = add_text_to_image_vertical(img, input_text["神託"], (320, 50), font_path, 50, 20)
-    icon = load_image_from_url(icon_url)
+    #icon = load_image_from_url(icon_url)
 
-    width, height = icon.size
-    rounded_icon = create_rounded_icon(icon, (width,height))
+    #width, height = icon.size
+    #rounded_icon = create_rounded_icon(icon, (width,height))
     
-    img = add_image_to_image(img, rounded_icon, (1610,530), (245,245))
+    #img = add_image_to_image(img, rounded_icon, (1610,530), (245,245))
     temp_file = NamedTemporaryFile(delete=False, suffix=".png")
     img.save(temp_file.name)
     temp_file.close()

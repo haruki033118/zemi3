@@ -1,11 +1,12 @@
 <script setup>
 import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useUserProfileStore } from "@/stores/userProfileStore";
+//import { useUserProfileStore } from "@/stores/userProfileStore";
 import LoginButton from "@/components/LoginButton.vue";
 import axios from "axios";
 
 const router = useRouter();
+/*
 const userStore = useUserProfileStore();
 
 // ログイン状態とユーザー情報を取得
@@ -28,6 +29,7 @@ onMounted(async () => {
     }
   }
 });
+*/
 
 // ボタンクリック時の処理
 const handleClick = () => {
@@ -51,36 +53,18 @@ const viewHistory = () => {
       />
       <img
         loading="lazy"
-        src="@/assets/img/nft-with-kami-logo.png"
-        class="gallery-header"
-        alt="NFTwith神ロゴ"
-      />
-      <img
-        loading="lazy"
         src="@/assets/img/background-shrine-alpha.png"
         class="gallery-overlay"
         alt="しめ縄"
       />
 
-      <div v-if="isLoggedIn">
         <button
           class="oracle-button"
           @click="handleClick"
         >
           おみくじ<br/>取得
         </button>
-        <button
-          class="view-history-button"
-          @click="viewHistory"
-        >
-          過去の<br/>おみくじ
-        </button>
-      </div>
-      <div v-else>
-        <LoginButton
-          class="login-button"
-        />
-      </div>
+        
     </div>
   </div>
 </template>

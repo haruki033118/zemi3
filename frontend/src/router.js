@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
-import { useUserProfileStore } from "@/stores/userProfileStore";
+//import { useUserProfileStore } from "@/stores/userProfileStore";
 
 import Login from "./views/Login.vue"
 import Location from "./views/Location.vue"
@@ -27,6 +27,7 @@ const router = createRouter({
 })
 
 // グローバルナビゲーションガードを追加
+/*
 router.beforeEach(async (to, from, next) => {
   const store = useUserProfileStore();
 
@@ -44,5 +45,6 @@ router.beforeEach(async (to, from, next) => {
     next(); // 通常通りルートへ遷移
   }
 });
+*/
 
 export default router

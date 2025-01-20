@@ -69,17 +69,18 @@ export default {
     //4. おみくじの生成とメタデータの取得
     async fetchCreatePhoto(omikujiText_json, shrineName) {
       //LINEアイコン取得
-      const userProfileStore = useUserProfileStore();
-      const profileImageUrl = computed(() => userProfileStore.profileImageUrl);
-      console.log(profileImageUrl.value);
+      //const userProfileStore = useUserProfileStore();
+      //const profileImageUrl = computed(() => userProfileStore.profileImageUrl);
+      //console.log(profileImageUrl.value);
 
       // おみくじ画像生成リクエスト
       const blobUrl = ref(null);
       console.log("2");
       console.log(omikujiText_json)
-      console.log(profileImageUrl.value)
+      //console.log(profileImageUrl.value)
       const response = await axios.post(
-        `/api/omikuzi?shrine_name=${encodeURIComponent(shrineName)}&icon_url=${encodeURIComponent(profileImageUrl.value)}`,
+        `/api/omikuzi?shrine_name=${encodeURIComponent(shrineName)}`,
+        //`/api/omikuzi?shrine_name=${encodeURIComponent(shrineName)}&icon_url=${encodeURIComponent(profileImageUrl.value)}`,
           omikujiText_json,
         {
         headers: {
