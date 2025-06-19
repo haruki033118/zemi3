@@ -20,7 +20,7 @@ font = '/app/services/omikuzi/玉ねぎ楷書激無料版v7改.ttf'
 )
 async def omikuzi(omikuzi_text: OmikuziText, 
                   background_tasks:BackgroundTasks,
-                  shrine_name:str=Query(default='拳母神社'), 
+                  shrine_name:str=Query(default='拳母神社')
                   #icon_url:HttpUrl=Query(...)
     ):
     # おみくじ画像を生成
@@ -34,5 +34,6 @@ async def omikuzi(omikuzi_text: OmikuziText,
     return FileResponse(
         generated_image_path,
         media_type="image/png",
-        filename="omikuzi.png",
+        filename="omikuzi.png"
     )
+#20250501引数一個だからreturnの中身もわんちゃん一個説？

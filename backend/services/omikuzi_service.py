@@ -54,14 +54,14 @@ def remove_file(file_path: str):
 def generate_omikuzi(img_path, font_path, omikuzi_text, shrine_name):
     img = Image.open(img_path).copy()
     input_text = omikuzi_text.dict()
-    img = add_text_to_image_vertical(img, shrine_name, (1830, 50), font_path, 50)
-    img = add_text_to_image_vertical(img, input_text["運勢"], (1630, 100), font_path, 200)
-    img = add_text_to_image_vertical(img, input_text["願望"], (1430, 50), font_path, 50, 20)
-    img = add_text_to_image_vertical(img, input_text["健康"], (1210, 50), font_path, 50, 20)
-    img = add_text_to_image_vertical(img, input_text["金運"], (990, 50), font_path, 50, 20)
-    img = add_text_to_image_vertical(img, input_text["学問"], (770, 50), font_path, 50, 20)
-    img = add_text_to_image_vertical(img, input_text["恋愛"], (550, 50), font_path, 50, 20)
-    img = add_text_to_image_vertical(img, input_text["神託"], (320, 50), font_path, 50, 20)
+    img = add_text_to_image_vertical(img, shrine_name, (1550, 50), font_path, 50)
+    img = add_text_to_image_vertical(img, input_text["運勢"], (1400, 280), font_path, 200)
+    img = add_text_to_image_vertical(img, input_text["願望"], (1280, 60), font_path, 40, 20)
+    img = add_text_to_image_vertical(img, input_text["健康"], (1080, 60), font_path, 40, 20)
+    img = add_text_to_image_vertical(img, input_text["金運"], (880, 60), font_path, 40, 20)
+    img = add_text_to_image_vertical(img, input_text["学問"], (680, 60), font_path, 40, 20)
+    img = add_text_to_image_vertical(img, input_text["恋愛"], (480, 60), font_path, 40, 20)
+    img = add_text_to_image_vertical(img, input_text["神託"], (290, 60), font_path, 40, 20)
     #icon = load_image_from_url(icon_url)
 
     #width, height = icon.size

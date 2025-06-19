@@ -9,7 +9,7 @@
       />
       <div class="fortune-display">
         <img v-if="blobUrl" :src="blobUrl" alt="Generated Omikuji" />
-        <div>NFT Details</div>
+        <!--<div>NFT Details</div>
         <div class="container unified-box">
           <div>
             <strong>Token ID:</strong> <span id="var1"></span>
@@ -26,23 +26,23 @@
           <div>
             <strong>Transaction Hash:</strong> <span id="var2"></span>
           </div>
-        </div>
+        </div>-->
       </div>
-      <div class="share-section">
+      <!--<div class="share-section">
         <button
           class="share-button"
           tabindex="0"
           @click="handleShare"
           aria-label="おみくじをシェア">
           <span>おみくじをシェア</span>
-        </button>
-        <!-- <img
+        </button>-->
+        <!--<img
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/1b3025bf1577dd0e3f2ae1f42ff1ae5f416bca32090785e1241417b7bc11443d?placeholderIfAbsent=true&apiKey=d15c8345fe15403fbf2733b286d943d4"
           class="share-icon"
           alt="Share fortune result"
-        /> -->
-      </div>
+        />--->
+      <!--</div>--->
       <button
          class="return-button"
          tabindex="0"
@@ -82,19 +82,28 @@ const omikuziText = {
 
 const blobUrl = ref(null);
 
-onMounted(async () => {
-  try {
-    const {photo, tokenId, transactionHash} = route.query;
-    blobUrl.value=photo;
-    document.getElementById("var1").textContent = tokenId;
-    document.getElementById("var2").textContent = transactionHash;
 
-    console.log("NFT Token ID:", tokenId);
+onMounted(()=>{
+  const{photo}=route.query;
+  blobUrl.value=photo;
+
+});
+/*onMounted(async () => {
+  try {
+    console.log(route.query)
+
+    const photo = route.query;
+    /*const {photo, tokenId, transactionHash} = route.query;*/
+    //blobUrl.value=photo;
+    /*document.getElementById("var1").textContent = tokenId;ttm*/
+    /*document.getElementById("var2").textContent = transactionHash;ttm*/
+    
+    /*console.log("NFT Token ID:", tokenId);ttm
   } catch (error) {
     console.error("エラーが発生しました:", error);
   }
-});
-const handleShare = async () => {
+});*/
+/*const handleShare = async () => {
   try {
     if (navigator.share) {
       console.log("Blob URL:", blobUrl.value);
@@ -111,7 +120,7 @@ const handleShare = async () => {
   } catch (error) {
     console.error("シェアエラー:", error);
   }
-};
+};*/
 
 
 
@@ -192,7 +201,7 @@ const handleReturn = () => {
   top: -10px;
 }
 
-.share-button {
+/*.share-button {
   align-self: center;
   flex-grow: 1;
   flex-basis: auto;
@@ -204,9 +213,9 @@ const handleReturn = () => {
   color: inherit;
   font-size: 30px;
   display: flex;
-  align-items: center; /* ボタン内テキストを縦方向中央揃え */
-  justify-content: center; /* ボタン内テキストを横方向中央揃え */
-}
+  align-items: center; ボタン内テキストを縦方向中央揃え 
+  justify-content: center;  ボタン内テキストを横方向中央揃え 
+} */
 
 /* .share-icon {
   position: relative; 

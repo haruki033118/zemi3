@@ -32,15 +32,16 @@
         <!-- ユーザー側のアイコン -->
         <div class="icon" v-if="message.sender === 'me'">
           <img
-            :src="profileImageUrl" 
+            src="@/assets/img/user-icon.jpg" 
             alt="ユーザーアイコン"
+            class="icon-image"
           />
         </div>
         <div class="bubble">{{ message.text }}</div>
       </div>
     </div>
     <div class="input-area">
-      <input v-model="newMessage" placeholder="メッセージを入力" />
+      <input v-model="newMessage" placeholder="メッセージを入力" @keyup.enter="sendMessage" />
       <button @click="sendMessage" class="send-button"></button>
     </div>
   </div>

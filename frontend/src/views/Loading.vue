@@ -96,10 +96,12 @@ export default {
 
       // NFTメタデータ取得用のリクエスト
       // NFTエンドポイントでファイルアップロードが必要な場合の例
-      const formData = new FormData();
-      formData.append("upload_file", response.data, "omikuzi.png");
-
-      const metadataResponse = await axios.post(
+      
+      //下の二行はコメントアウトするかも？ttm
+      //const formData = new FormData();
+      //formData.append("upload_file", response.data, "omikuzi.png");
+      //console.log("ここまでできてるよ2");
+      /*const metadataResponse = await axios.post(
         `/api/nft`,
         formData,
         {
@@ -108,27 +110,45 @@ export default {
           }
         }
       );  
-      console.log("NFT Token ID:", metadataResponse.data.tokenId);
-      console.log(metadataResponse.data.image);
-      console.log(metadataResponse.data.transactionHash);
-      const photo=metadataResponse.data.image;
-      const tokenId=metadataResponse.data.tokenId;
-      const transactionHash=metadataResponse.data.transactionHash;
-      return { photo, tokenId, transactionHash };
+      */
+      /*console.log("NFT Token ID:", metadataResponse.data.tokenId);ttm*/
+      /*console.log(metadataResponse.data.image);ttm*/
+      /*console.log(metadataResponse.data.transactionHash);ttm*/
+      
+      const photo = new FormData();
+      photo.append("upload_file", response.data, "omikuzi.png");
+      
+      console.log("ここまでできてるよ2");
+      console.log(photo)
+      /*const tokenId=metadataResponse.data.tokenId;ttm*/
+      /*const transactionHash=metadataResponse.data.transactionHash;ttm*/
+      /*return { photo, tokenId, transactionHash };ttm*/
+      return (response.data);
+      
     },
 
     // 5. /Omikuji ページに遷移する関数
-    navigateToOmikujiPage(photo, tokenId, transactionHash) {
+    navigateToOmikujiPage(photo /*,tokenId,ttm transactionHash*/) {
       console.log("Navigating to /Omikuji with omikuji text...");
-      console.log("photo:", photo, "tokenId:", tokenId, "transactionHash:", transactionHash);
+      console.log("photo:", photo /*,"tokenId:", tokenId,"transactionHash:", transactionHash ttm*/);
+      console.log(photo);
+      const blob = photo; // Blob データ
+      const blobUrl = URL.createObjectURL(blob);
       this.$router.push({
         path: "/Omikuji",
         query: {
-          photo: photo,
-          tokenId: tokenId,
-          transactionHash: transactionHash
+          photo: blobUrl,
         },
       });
+      //20250501ここまでphotoに入っているぽいけどこれ以降？photoに何も入ってない（undefined）
+      /*this.$router.push({
+        path: "/Omikuji",
+        query: {
+          photo: photo,
+          /*tokenId: tokenId,ttm*/
+          /*transactionHash: transactionHash...ttm
+        },
+      });*/
     },
 
     // メインフローを実行する関数
@@ -142,12 +162,14 @@ export default {
 
         // Step 3: jsonに変更
         const { omikujiText_json, shrineName: shrineName } = await this.fetchJsonCreate(summaryText, updatedThreadId);
-
+        console.log("photo生成完了")
         // Step 4: photoを生成
-        const {photo, tokenId, transactionHash} = await this.fetchCreatePhoto(omikujiText_json, shrineName);
-        
+        /*const {photo, tokenId, transactionHash} = await this.fetchCreatePhoto(omikujiText_json, shrineName);*/
+        const photo = await this.fetchCreatePhoto(omikujiText_json, shrineName);
+        console.log("photo生成完了")
+      　
         // Step 4: Omikuji ページに遷移
-        this.navigateToOmikujiPage(photo, tokenId, transactionHash);
+        this.navigateToOmikujiPage(photo /*,tokenId,transactionHash ttm*/);
 
       } catch (error) {
         console.error("Error during fetching or navigation:", error);

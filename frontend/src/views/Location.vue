@@ -138,9 +138,13 @@ onMounted(() => {
 /* 全体のスタイル */
 .shrine-selection {
   display: flex;
+  max-width: 480px; 
   flex-direction: column;
+  overflow: hidden;
   align-items: center;
   width: 100%;
+  white-space: nowrap;
+  font: 400 48px;
   margin: 0 auto;
   text-align: center;
 }
@@ -223,7 +227,7 @@ onMounted(() => {
 }
 
 .shrine-name {
-  font-size: 4vw;
+  font-size: 20px;
   font-weight: bold;
   color: #333;
 }
