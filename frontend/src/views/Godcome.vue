@@ -99,6 +99,13 @@ setTimeout(() => {
 <style scoped>
 .hero-section {
   display: flex;
+  max-width: 480px;
+  
+  object-position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
   flex-direction: column;
   position: relative;
   aspect-ratio: 0.461;

@@ -73,6 +73,13 @@ const viewHistory = () => {
 .gallery-container {
   background: linear-gradient(to bottom, #35ECBB, #FF9C12);
   display: flex;
+  
+  max-width: 480px;
+  object-position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
   flex-direction: column;
   overflow: hidden;
   width: 100%;

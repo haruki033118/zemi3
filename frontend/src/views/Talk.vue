@@ -163,6 +163,8 @@ export default {
 <style scoped>
 .chat-container {
   display: flex;
+  object-position: center;
+  
   flex-direction: column;
   height: 100vh;
   max-width: 600px;
@@ -173,7 +175,16 @@ export default {
 .background-container {
   position: fixed;
   top: 0;
-  left: 0;
+  
+  left: 50%;/* 画面の左から50% */
+  transform: translateX(-50%); /* 画像の幅の半分を左にずらす＝中央寄せ */
+  align-items: center;
+  object-position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+
   width: 100%;
   height: 100%;
   z-index: -1;

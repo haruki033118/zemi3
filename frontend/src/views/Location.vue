@@ -138,7 +138,13 @@ onMounted(() => {
 /* 全体のスタイル */
 .shrine-selection {
   display: flex;
-  max-width: 480px; 
+  max-width: 480px;
+    
+  object-position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
   flex-direction: column;
   overflow: hidden;
   align-items: center;
@@ -153,7 +159,16 @@ onMounted(() => {
 .background-container {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;/* 画面の左から50% */
+  transform: translateX(-50%); /* 画像の幅の半分を左にずらす＝中央寄せ */
+ 
+  align-items: center;
+  object-position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 480px;
+
   width: 100%;
   height: 100%;
   z-index: -1;
@@ -233,13 +248,14 @@ onMounted(() => {
 }
 
 .distance {
-  font-size: 3.5vw;
+  font-size: 20px;
   color: #666;
 }
 
 /* 選択された神社 */
 .selected-shrine {
   margin-top: 20px;
+  font-size: 20px;
   padding: 10px;
   border: 2px solid #000000; /* 黒の枠を追加 */
   background-color: #ffffff;
@@ -256,7 +272,7 @@ onMounted(() => {
 .selected-shrine p {
   position: relative; /* z-indexを指定できるように設定 */
   z-index: 1001; /* 親要素よりもさらに前面に表示 */
-  font-size: 4vw;
+  font-size: 30px;
   font-weight: bold;
   transform: translateZ(0); /* Safariでの再描画を強制 */
 }
@@ -265,7 +281,7 @@ onMounted(() => {
 .select-button {
   margin-top: 10px;
   padding: 10px 20px;
-  font-size: 3.5vw;
+  font-size: 20px;
   color: #000000;
   border: 2px solid #000000; /* 黒の枠を追加 */
   border-radius: 4px;
@@ -286,8 +302,8 @@ onMounted(() => {
 
 /* ローディング中 */
 .loading {
-  font-size: 4vw;
+  font-size: 30px;
   color: #333;
-  margin-top: 20px;
+  margin-top: 100px;
 }
 </style>
