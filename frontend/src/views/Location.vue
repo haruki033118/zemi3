@@ -295,7 +295,7 @@ onMounted(() => {
 /* エラーおよび空リストメッセージ */
 .error,
 .no-shrines {
-  margin-top: 20px;
+  margin-top:100px;
   font-size: 4vw;
   color: #ff0000;
 }

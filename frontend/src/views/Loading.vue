@@ -128,16 +128,20 @@ export default {
     },
 
     // 5. /Omikuji ページに遷移する関数
-    navigateToOmikujiPage(photo /*,tokenId,ttm transactionHash*/) {
+    navigateToOmikujiPage(photo , omikujiText_json /*,tokenId,ttm transactionHash*/) {
       console.log("Navigating to /Omikuji with omikuji text...");
       console.log("photo:", photo /*,"tokenId:", tokenId,"transactionHash:", transactionHash ttm*/);
       console.log(photo);
       const blob = photo; // Blob データ
       const blobUrl = URL.createObjectURL(blob);
+      //ami const encodedOmikuji = encodeURIComponent(JSON.stringify(omikujiText)); //ami
+      console.log("omikujiText_json", omikujiText_json
+      );
       this.$router.push({
         path: "/Omikuji",
         query: {
           photo: blobUrl,
+          omikuji: omikujiText_json, // ami
         },
       });
       //20250501ここまでphotoに入っているぽいけどこれ以降？photoに何も入ってない（undefined）
@@ -169,7 +173,7 @@ export default {
         console.log("photo生成完了")
       　
         // Step 4: Omikuji ページに遷移
-        this.navigateToOmikujiPage(photo /*,tokenId,transactionHash ttm*/);
+        this.navigateToOmikujiPage(photo ,　omikujiText_json /*,tokenId,transactionHash ttm*/);
 
       } catch (error) {
         console.error("Error during fetching or navigation:", error);

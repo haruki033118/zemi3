@@ -9,6 +9,10 @@
       />
       <div class="fortune-display">
         <img v-if="blobUrl" :src="blobUrl" alt="Generated Omikuji" />
+        <button class="print-button" @click="handlePrint">
+          🖨️ 印刷する
+        </button>
+        
         <!--<div>NFT Details</div>
         <div class="container unified-box">
           <div>
@@ -67,26 +71,78 @@ import axios from "axios";
 
 const router = useRouter();
 const route = useRoute();
-
+const omikujiText = ref({});//ami
 const picture = "https://tyoudoii-illust.com/wp-content/uploads/2024/07/oksign_businessman_simple-300x282.png";
 
 const omikuziText = {
   "運勢": "大吉",
   "願望": "多くの思いを乗せ...",
-  "健康": "日々の生活tinnpoを整えれば...",
-  "金運": "自分のtinnpo強みを活かして...",
-  "学問": "劇的にtinpo伸時期timm中して...",
-  "恋愛": "信じ合うことtinnpotinnpo離に打ち勝て...",
-  "神託": "一輝よ、朝の目覚めtinnpoせずに新たな環境で暮らすと..."
+  "健康": "日々の生活を整えれば...",
+  "金運": "自分の強みを活かして...",
+  "学問": "劇的にして...",
+  "恋愛": "信じ合うこと離に打ち勝て...",
+  "神託": "一輝よ、朝の目覚めに新たな環境で暮らすと..."
 };
 
 const blobUrl = ref(null);
 
 
 onMounted(()=>{
-  const{photo}=route.query;
+  const{photo, omikuji }=route.query; //ami omikuji
   blobUrl.value=photo;
-
+  
+  // おみくじのJSON文字列を正しくパースする
+  if (typeof omikuji === "string") {
+    try {
+      omikujiText.value = JSON.parse(decodeURIComponent(omikuji));
+      console.log("パースされたomikujiText:", omikujiText.value);
+      console.log("運勢:", omikujiText.value["運勢"]);
+    } catch (e) {
+      console.error("おみくじテキストのパースに失敗しました:", e);
+      // オプションでomikujiTextのデフォルト値またはエラー状態を設定
+      omikujiText.value = {
+        "運勢": "N/A",
+        "願望": "情報が取得できませんでした。",
+        "健康": "情報が取得できませんでした。",
+        "金運": "情報が取得できませんでした。",
+        "学問": "情報が取得できませんでした。",
+        "恋愛": "情報が取得できませんでした。",
+        "神託": "情報が取得できませんでした。"
+      };
+    }
+  } else {
+    console.warn("おみくじクエリパラメータが見つからないか、文字列ではありません。");
+    // オプションでデフォルト値またはエラー状態を設定
+    omikujiText.value = {
+      "運勢": "N/A",
+      "願望": "情報が取得できませんでした。",
+      "健康": "情報が取得できませんでした。",
+      "金運": "情報が取得できませんでした。",
+      "学問": "情報が取得できませんでした。",
+      "恋愛": "情報が取得できませんでした。",
+      "神託": "情報が取得できませんでした。"
+    };
+  }  
+  
+  //console.log("Omikuji", omikuji);
+  //omikujiText.value=omikuji;
+  //omikujiText.value = JSON.parse(decodeURIComponent(omikuji));
+  //console.log("OmikujiText.value", omikuji);
+  //console.log("unsei:", omikujiText.value["運勢"]);
+  // おみくじテキストの受け取り・デコード
+  /*if (typeof omikuji === "string") {
+    try {
+      omikujiText.value = JSON.parse(decodeURIComponent(omikuji));
+    } catch (e) {
+      console.error("おみくじテキストの復元に失敗しました:", e);
+    }
+  } else {
+    console.warn("omikujiクエリが存在しません");
+  }
+  /*if (typeof omikuji === "string") {
+    const decoded = decodeURIComponent(omikuji);
+    omikujiText.value = decoded; // ここでは string として扱う
+  }*/
 });
 /*onMounted(async () => {
   try {
@@ -128,7 +184,39 @@ const handleReturn = () => {
   router.push("/");
 };
 
+const handlePrint = () => {
+  const content = `
+    <div style="font-family: sans-serif; padding: 20px; font-size: 10px;">
+      <h1 style="text-align:center;">おみくじ結果</h1>
+      <p><strong>運勢：</strong>${omikujiText.value["運勢"] || 'N/A'}</p>
+      <p><strong>神託：</strong>${omikujiText.value["神託"] || 'N/A'}</p>
+    </div>
+  `;
 
+  const printWindow = window.open('', '_blank');
+  if (!printWindow) {
+    alert("ポップアップブロックを解除してください");
+    return;
+  }
+
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>おみくじ印刷</title>
+        <style>
+          body {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+      </head>
+      <body>${content}</body>
+    </html>
+  `);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+};
 
 </script>
 
